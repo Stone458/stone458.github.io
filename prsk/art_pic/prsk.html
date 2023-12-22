@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>
+        pjsk盲盒
+    </title>
+    <link rel="icon" href="prsk.png">
+</head>
+<script src="goods.js"></script>
+<style>
+    .跳转邦
+    {
+        color: rgb(229,0,79);
+        position: relative;
+        left: 35px;
+    }
+    .跳转
+    {
+        position: relative;
+        left: 30px;
+        top: 20px;
+        width: 158px;
+        height: 100px;
+        border-width:5px ;
+        border-color:rgb(229,0,79) ;
+        border-style:dashed ;
+    }
+    .garupa
+    {
+        position: relative;
+        left:20px;
+    }
+    .选盒
+    {
+        width: 200px;
+        height: 30px;
+        text-align: center;
+    }
+    .盒图
+    {
+        height: 300px;
+    }
+    .开包区
+    {
+        z-index: -2;
+        position: relative;
+        top: 50px;
+        text-align: center;
+        margin: auto;
+        border-width:5px ;
+        border-color:rgb(0,188,208) ;
+        border-style:dashed ;
+        width: 200px;
+        height: 330px;
+    }
+    .main
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+<div class="跳转">
+    <input class="garupa" type="image" src="../garupa/garupa.png" height="60" onclick="window.location.href='../garupa/garupa.html'">
+    <p class="跳转邦">切换成邦</p>
+</div>
+<div class="main">
+    <h1>选择要抽的盒</h1>
+    <img class="盒图" src="prsk.png" alt="展示盒" id="展示盒">
+    <br>
+    <select name="选盒" id="选盒" class="选盒">
+        <option value="NULL">---选择一个盒---</option>
+        <option value="25三周年live吧唧">25三周年live吧唧</option>
+        <option value="初雪月光ep卡">初雪月光ep卡</option>
+        <option value="黑百合花前细闪">黑百合花前细闪</option>
+        <option value="魔女 bug ep卡">魔女 bug ep卡</option>
+        <option value="圣诞无限灰花后细闪">圣诞无限灰花后细闪</option>
+    </select>
+    <br>
+    <button onclick="展示盒()">确定</button>
+    <br>
+    <input id="开包" type="image" height="150" src="../透明.png" onclick="开谷子()">
+</div>
+<div class="开包区">
+    <h2>开包区</h2>
+    <br>
+    <img src="../透明.png" alt="开包区" id="开包区" width="150">
+</div>
