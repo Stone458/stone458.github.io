@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        邦邦盲盒
+    </title>
+    <link rel="icon" href="garupa.png">
+<style>
+    *{margin:0;padding:0;}
+    .跳转烤
+    {
+        color: rgb(0,188,208);
+        position: relative;
+        left: 40px;
+    }
+    .跳转
+    {
+        position: relative;
+        left: 30px;
+        top: 20px;
+        width: 158px;
+        height: 100px;
+        border-width:5px ;
+        border-color:rgb(0,188,208) ;
+        border-style:dashed ;
+    }
+    .main
+    {
+        text-align: center;
+        margin-left: auto;
+    }
+    .选盒
+    {
+        width: 200px;
+        height: 30px;
+        text-align: center;
+    }
+    .盒图
+    {
+        height: 300px;
+    }
+    .开包区
+    {
+        position: relative;
+        top: 50px;
+        text-align: center;
+        margin: auto;
+        border-width:5px ;
+        border-color:rgb(229,0,79) ;
+        border-style:dashed ;
+        width: 400px;
+        height: 430px;
+    }
+    #package
+    {
+        z-index: 2;
+        position:absolute;
+        left:auto;
+        top:50px;
+        width:200px;
+        height:200px;
+    }
+    .结果
+    {
+        z-index: -1;
+        height: 180px;
+        position:relative;
+    }
+    .new
+    {
+        z-index: 2;
+        position: absolute;
+        top: 300px;
+        left: 150px;
+        margin:auto;
+        text-align: center;
+        width: 90px;
+        height: 40px;
+    }
+</style>
+</head>
+<body>
+<div class="跳转">
+    <input class="prsk" type="image" src="../prsk/prsk.png" height="60" onclick="window.location.href='../prsk/prsk.html'">
+    <p class="跳转烤">切换成烤</p>
+</div>
+<div class="main">
+    <h1>选择要抽的盒</h1>
+    <img class="盒图" src="garupa.png" alt="展示盒" id="展示盒">
+    <br>
+    <select name="选盒" id="选盒" class="选盒">
+        <option value="NULL">---选择一个盒---</option>
+        <option value="甜品天堂吧唧">甜品天堂吧唧</option>
+        <option value="甜品天堂相卡">甜品天堂相卡</option>
+        <option value="gigo杯垫">gigo杯垫</option>
+        <option value="gigo拍立得">gigo拍立得</option>
+        <option value="v2星挂1">v2星挂1</option>
+        <option value="v2星挂2">v2星挂2</option>
+    </select>
+    <br>
+    <button onclick="展示盒()">确定</button>
+    <br>
+</div>
+<div class="开包区">
+    <h2>开包区</h2>
+    <br>    
+    <img src="../package.png" alt="包装" width="150" draggable="false" id="package">
+    <img src="../透明.png" alt="结果" class="结果" id="结果">
+    <input type="submit" class="new" value="开包新的" onclick="new_goods()">
+</div>
+<script src="goods.js" defer></script>
+<script defer>
+        //onmousedown 鼠标按下触发事件
+        //onmousemove 鼠标按下时持续触发事件
+        //onmouseup   鼠标抬起触发事件
+        let block = document.getElementById('package');
+        block.onmousedown = function(e){
+            //获取鼠标点击位置距离被点击模块的left与top距离
+            //e是点击事件的e , this是box元素的this
+            let x = e.clientX - this.offsetLeft
+            document.onmousemove = function(e){
+                //拖拽时距离文档left与top距离 减去 距离拖拽物的left与top距离 = 拖拽物的位置
+                block.style.cssText = `left:${ e.clientX - x }px`;
+            }
+            document.onmouseup = function(){
+                //清除事件
+                document.onmouseup = null;
+                document.onmousemove = null;
+                block.onmouseup=null;
+            }
+        }
+        block.addEventListener('touchstart',(e)=>
+        {
+            e.preventDefault();
+            let x = e.targetTouches[0].clientX - block.offsetLeft;
+            block.addEventListener('touchmove',(e)=>
+            {
+                block.style.left=""+e.targetTouches[0].clientX-x+"px";
+            })
+            document.addEventListener('touchend',()=>
+            {
+                document.removeEventListener('touchstart',e);
+                document.removeEventListener('touchmove',e);
+                document.removeEventListener('touchend',e);
+            })//手机端的操作使用touchstart等
+        }
+        )
+</script>
+</body>
+</html>
+<!--还差结果统计功能的代码没写-->
